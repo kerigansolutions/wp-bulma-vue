@@ -1,0 +1,5 @@
+{
+  "require-dev": {
+    "panique/laravel-sass": "1.0"
+  }
+}

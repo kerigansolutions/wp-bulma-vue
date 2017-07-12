@@ -1,0 +1,21 @@
+/* Testimonials CSS */
+.full-quotes {
+    padding: 1.5em 0 0;
+    margin-bottom:1em;
+    border-bottom:1px solid #dedede;
+}
+.full-quotes p.quote-content {
+    font-size: 1.3em;
+}
+.full-quotes p.quote-author {
+    padding-bottom: 2.5em;
+}
+.quote-author::before {
+    content: "\2014";
+}
+.quote-content::before {
+    content: "\201C";
+}
+.quote-content::after {
+    content: "\201D";
+}

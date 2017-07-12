@@ -1,0 +1,96 @@
+[
+    {
+        "name": "leafo/scssphp",
+        "version": "v0.0.14",
+        "version_normalized": "0.0.14.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/leafo/scssphp.git",
+            "reference": "dfb793daf3ecdce82c40fb6e6c3a84b6ab230364"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/leafo/scssphp/zipball/dfb793daf3ecdce82c40fb6e6c3a84b6ab230364",
+            "reference": "dfb793daf3ecdce82c40fb6e6c3a84b6ab230364",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.2.0"
+        },
+        "require-dev": {
+            "php": ">=5.3.0",
+            "phpunit/phpunit": "3.7.*"
+        },
+        "time": "2014-08-05T05:45:15+00:00",
+        "bin": [
+            "pscss"
+        ],
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "scss.inc.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT",
+            "GPL-3.0"
+        ],
+        "authors": [
+            {
+                "name": "Leaf Corcoran",
+                "email": "leafot@gmail.com",
+                "homepage": "http://leafo.net"
+            }
+        ],
+        "description": "scssphp is a compiler for SCSS written in PHP.",
+        "homepage": "http://leafo.net/scssphp/"
+    },
+    {
+        "name": "panique/laravel-sass",
+        "version": "1.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/panique/laravel-sass.git",
+            "reference": "23e7b9ced6f8a646f84c12307d7f6a4df85d3b86"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/panique/laravel-sass/zipball/23e7b9ced6f8a646f84c12307d7f6a4df85d3b86",
+            "reference": "23e7b9ced6f8a646f84c12307d7f6a4df85d3b86",
+            "shasum": ""
+        },
+        "require": {
+            "leafo/scssphp": "v0.0.14",
+            "php": ">=5.3.0"
+        },
+        "time": "2014-11-09T01:35:34+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "sass-compiler.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Panique",
+                "homepage": "http://careers.stackoverflow.com/panique",
+                "role": "Developer"
+            }
+        ],
+        "description": "Compiles your SASS .scss files to .css every time you run your app (in development)",
+        "homepage": "https://github.com/panique/laravel-sass",
+        "keywords": [
+            "css",
+            "sass",
+            "scss"
+        ]
+    }
+]

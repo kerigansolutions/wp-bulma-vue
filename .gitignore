@@ -1,0 +1,5 @@
+.idea/
+wp-content/themes/kma-slim/node_modules/
+*.min.js
+*.min.css
+wp-config.php
