@@ -11,13 +11,13 @@ License:            MIT License
 License URI:        http://opensource.org/licenses/MIT
 */
 
-// Variables
-@import "variables.scss";
+// Set Variables
+@import "variables.sass";
 
-// Bulma
+//Bulma
 @import "../node_modules/bulma/bulma";
 
-// Core
+// WP Core
 @import "core.scss";
 
 // Theme
