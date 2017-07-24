@@ -40,7 +40,7 @@ function kmaslim_setup() {
 			<?php echo file_get_contents(get_template_directory() . '/style.css'); ?>
 		</style>
 	<?php }
-	add_action( 'wp_head', 'kmaslim_inline' );
+	//add_action( 'wp_head', 'kmaslim_inline' );
 
 	wp_register_script( 'scripts', get_template_directory_uri() . '/app.js', array(), '0.0.1', true );
 
@@ -50,5 +50,6 @@ add_action( 'after_setup_theme', 'kmaslim_setup' );
 
 function kmaslim_scripts() {
 	wp_enqueue_script( 'scripts' );
+	wp_enqueue_style( 'style', get_stylesheet_uri() );
 }
 add_action( 'wp_enqueue_scripts', 'kmaslim_scripts' );

@@ -12,6 +12,10 @@ body {
   flex-direction: column;
 }
 
+body * {
+  font-family: 'Raleway', sans-serif;
+}
+
 //Sticky Header
 #top {
   width: 100%;
@@ -23,4 +27,39 @@ body {
 
 #mid {
   flex: 1 0 auto;
+}
+
+.is-transparent {
+  background-color: transparent;
+}
+
+.full-bg {
+  background-size: cover;
+  background-attachment: scroll;
+}
+
+.black-50 {
+  color:#FFF !important;
+  background-color: rgba(0,0,0,.5);
+  text-shadow: 0 0 20px rgba(0,0,0,.9);
+}
+.white-50 {
+  background-color: rgba(255,255,255,.5);
+  text-shadow: 0 0 20px rgba(255,255,255,.9);
+}
+
+a.clickdown.icon.center {
+  margin: 1rem auto;
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  border: 1px solid #FFF;
+  border-radius: 50%;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.clickdown i.fa.fa-angle-down {
+  font-size: 2.2em;
+  line-height: 1.15em;
 }
