@@ -18,6 +18,7 @@
 
 <body <?php body_class(); ?> >
 <a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', 'kmaslim' ); ?></a>
+<div id="app">
 <header id="top" class="header">
     <nav class="navbar is-transparent">
         <div class="navbar-brand">
@@ -25,15 +26,14 @@
                 <img src="<?php echo get_template_directory_uri() . '/img/slim-logo.svg'; ?>" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28">
             </a>
 
-            <div class="navbar-burger burger" id="TopNavBurger" data-target="TopNavMenu">
+            <div class="navbar-burger burger" id="TopNavBurger" data-target="TopNavMenu" @click="toggleMenu">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
         </div>
 
-        <div id="TopNavMenu"
-                class="navbar-menu">
+        <div id="TopNavMenu" :class="[{ 'is-active': isOpen }, 'navbar-menu']" >
 			<?php wp_nav_menu( array(
 					'theme_location' => 'main-menu',
 					'container'      => false,

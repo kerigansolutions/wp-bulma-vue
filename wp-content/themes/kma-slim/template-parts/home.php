@@ -26,3 +26,4 @@ $subhead = ($post->page_information_subhead != '' ? $post->page_information_subh
         </div>
     </article><!-- #post-## -->
 </div>
+<modal v-if="isVisible" @close="isVisible = false"><div class="box" >Welcome!</div></modal>
