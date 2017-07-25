@@ -9,20 +9,25 @@ get_header();
 
     if ( have_posts() ) :
 
-        /* Start the Loop */
-        while ( have_posts() ) : the_post();
+		if (is_home() ) { //multipart template, archive or whatever
 
-            if ( is_front_page() ) {
-	            get_template_part( 'template-parts/home' );
-            } elseif( is_home() ) {
-	            get_template_part( 'template-parts/loop', get_post_format() );
-            } else {
-	            get_template_part( 'template-parts/content', get_post_format() );
-            }
+			get_template_part( 'template-parts/blog', get_post_format() );
 
-        endwhile;
+		}else {
 
-        the_posts_navigation();
+			while ( have_posts() ) : the_post();
+
+				if ( is_front_page() ) {
+					get_template_part( 'template-parts/home' );
+				} else {
+					get_template_part( 'template-parts/content', get_post_format() );
+				}
+
+			endwhile;
+
+			the_posts_navigation();
+
+		}
 
     else :
 

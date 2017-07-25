@@ -101,15 +101,53 @@ var app = new Vue({
         isOpen: false,
         siteby: 'Site by KMA.',
         copyright: 'Kerigan Marketing Associates. All rights reserved.',
-        isVisible: true
+        isVisible: true,
+        sliderSlides: ['/wp-content/themes/kma-slim/img/placeholder-1.jpg', '/wp-content/themes/kma-slim/img/placeholder-2.jpg', '/wp-content/themes/kma-slim/img/placeholder-3.jpg', '/wp-content/themes/kma-slim/img/placeholder-4.jpg', '/wp-content/themes/kma-slim/img/placeholder-5.jpg'],
+        currentImage: '/wp-content/themes/kma-slim/img/placeholder-1.jpg',
+        counter: 0,
+        paused: false
     },
 
     methods: {
         toggleMenu: function toggleMenu() {
             this.isOpen = !this.isOpen;
+        },
+        clickNext: function clickNext() {
+            this.paused = true;
+            this.nextSlide();
+        },
+        clickPrev: function clickPrev() {
+            this.paused = true;
+            this.prevSlide();
+        },
+        nextSlide: function nextSlide() {
+            this.counter++;
+            if (this.counter == 4) {
+                this.counter = 0;
+            }
+            this.currentImage = this.sliderSlides[this.counter];
+        },
+        prevSlide: function prevSlide() {
+            this.counter = this.counter - 1;
+            if (this.counter == -1) {
+                this.counter = 4;
+            }
+            this.currentImage = this.sliderSlides[this.counter];
         }
-    }
+    },
 
+    beforeUpdate: function beforeUpdate() {},
+    created: function created() {
+        var _this = this;
+
+        this.currentImage = this.sliderSlides[0];
+
+        setInterval(function () {
+            if (_this.paused == false) {
+                _this.nextSlide();
+            }
+        }, 6000);
+    }
 });
 
 /***/ }),

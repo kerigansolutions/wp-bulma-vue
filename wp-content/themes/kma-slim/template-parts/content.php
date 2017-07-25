@@ -10,7 +10,7 @@ $subhead = ($post->page_information_subhead != '' ? $post->page_information_subh
 ?>
 <div id="mid" >
     <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-        <section class="hero is-primary is-bold">
+        <section class="hero is-light">
             <div class="hero-body">
                 <div class="container">
                     <h1 class="title"><?php echo $headline; ?></h1>
