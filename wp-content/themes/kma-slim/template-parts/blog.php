@@ -20,7 +20,7 @@ $subhead = ($post->page_information_subhead != '' ? $post->page_information_subh
         </section>
         <section id="content" class="content section">
             <div class="container">
-                <div class="columns">
+                <div class="columns is-multiline">
                 <?php
 
                     while ( have_posts() ) : the_post();

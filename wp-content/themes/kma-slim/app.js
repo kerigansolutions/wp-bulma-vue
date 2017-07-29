@@ -74,7 +74,7 @@ window.Vue = __webpack_require__(2);
 
 Vue.component('message', {
 
-    props: ['title', 'body'],
+    props: ['title'],
 
     data: function data() {
         return {
@@ -83,13 +83,70 @@ Vue.component('message', {
     },
 
 
-    template: '\n    <article class="message" v-show="isVisible">\n        <div class="message-header"> {{ title }} <button class="delete" @click="$emit(\'close\')"></button></div>\n        <div class="message-body">\n            <slot></slot>\n        </div>\n    </article>\n    '
+    template: '\n    <article class="message" v-show="isVisible">\n        <div class="message-header"> {{ title }} <button class="delete" @click="hideMessage"></button></div>\n        <div class="message-body">\n            <slot></slot>\n        </div>\n    </article>\n    ',
+
+    methods: {
+        hideMessage: function hideMessage() {
+            this.isVisible = !this.isVisible;
+        }
+    }
 
 });
 
 Vue.component('modal', {
 
-    template: '\n    <div class="modal is-active">\n      <div class="modal-background"></div>\n      <div class="modal-content">\n        <slot></slot>\n      </div>\n      <button class="modal-close is-large" @click="$emit(\'close\')"></button>\n    </div>\n    '
+    template: '\n    <div class="modal is-active">\n      <div class="modal-background"></div>\n      <div class="modal-content">\n          <div class="box">\n            <slot></slot>\n          </div>\n      </div>\n      <button class="modal-close is-large" @click="$emit(\'close\')"></button>\n    </div>\n    '
+
+});
+
+Vue.component('tabs', {
+
+    template: '\n    <div>\n        <div class="tabs is-toggle is-fullwidth">\n          <ul>\n            <li v-for="tab in tabs" :class="{ \'is-active\': tab.isActive }" >\n                <a :href="tab.href" @click="selectTab(tab)">{{ tab.name }}</a>\n            </li>\n          </ul>\n        </div>\n        \n        <div class="tabs-details">\n            <slot></slot>\n        </div>\n    </div>\n    ',
+
+    data: function data() {
+        return { tabs: [] };
+    },
+    created: function created() {
+        this.tabs = this.$children;
+    },
+
+
+    methods: {
+        selectTab: function selectTab(selectedTab) {
+            this.tabs.forEach(function (tab) {
+                tab.isActive = tab.name == selectedTab.name;
+            });
+        }
+    }
+
+});
+
+Vue.component('tab', {
+
+    props: {
+        name: { required: true },
+        selected: { default: false }
+    },
+
+    data: function data() {
+        return {
+            isActive: false
+        };
+    },
+
+
+    computed: {
+        href: function href() {
+            return '#' + this.name.toLowerCase().replace(/ /g, '-');
+        }
+    },
+
+    mounted: function mounted() {
+        this.isActive = this.selected;
+    },
+
+
+    template: '\n    <div class="tab-item" v-show="isActive">\n        <slot></slot>\n    </div>\n    '
 
 });
 
@@ -99,9 +156,9 @@ var app = new Vue({
 
     data: {
         isOpen: false,
+        modalOpen: false,
         siteby: 'Site by KMA.',
         copyright: 'Kerigan Marketing Associates. All rights reserved.',
-        isVisible: true,
         sliderSlides: ['/wp-content/themes/kma-slim/img/placeholder-1.jpg', '/wp-content/themes/kma-slim/img/placeholder-2.jpg', '/wp-content/themes/kma-slim/img/placeholder-3.jpg', '/wp-content/themes/kma-slim/img/placeholder-4.jpg', '/wp-content/themes/kma-slim/img/placeholder-5.jpg'],
         currentImage: '/wp-content/themes/kma-slim/img/placeholder-1.jpg',
         counter: 0,
