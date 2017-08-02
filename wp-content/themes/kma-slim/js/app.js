@@ -1,5 +1,95 @@
 window.Vue = require('vue');
 
+Vue.component('slider', {
+
+    template: `
+    <div class="slider">
+        <div class="slider-left icon is-large" >
+            <i class="fa fa-angle-left is-large" aria-hidden="true"></i>
+        </div>
+        
+        <div class="slides">
+            <slot></slot>
+        </div>
+        
+        <div class="slider-right icon is-large" >
+            <i class="fa fa-angle-right is-large" aria-hidden="true"></i>
+        </div>
+    </div>
+    `,
+
+    data(){
+        return {
+            slides: [],
+            activeSlide: 0,
+            paused: false
+        };
+    },
+
+    created(){
+
+        this.slides = this.$children;
+
+        setInterval(() => { if(this.paused == false){ this.nextSlide() } }, 6000)
+
+    },
+
+    methods: {
+
+        nextSlide(){
+            this.slides[this.activeSlide]._data.isActive = false
+            if(this.activeSlide == this.slides.length-1){
+                this.activeSlide = -1
+            }
+            this.activeSlide++
+            this.slides[this.activeSlide]._data.isActive = true
+        },
+
+        prevSlide(){
+            this.slides[this.activeSlide]._data.isActive = false
+            if(this.activeSlide == -1){
+                this.activeSlide = this.slides.length-1
+            }
+            this.activeSlide--
+            this.slides[this.activeSlide]._data.isActive = true
+        },
+
+        togglePause(){
+            this.paused = !this.paused;
+        }
+
+    }
+
+});
+
+Vue.component('slide', {
+
+    props: {
+        image: { required: true }
+    },
+
+    template: `
+    <div class="slide" :style="{ 'background-image': 'url(' + image + ')' }" :class="{ 'is-active': this.isActive }">
+        <slot></slot>
+    </div>
+    `,
+
+    data(){
+        return {
+            isActive: false
+        };
+    },
+
+    computed: {
+
+    },
+
+    methods: {
+
+    }
+
+});
+
 Vue.component('message', {
 
     props: ['title'],
@@ -120,63 +210,15 @@ var app = new Vue({
         modalOpen: false,
         siteby: 'Site by KMA.',
         copyright: 'Kerigan Marketing Associates. All rights reserved.',
-        sliderSlides: [
-            '/wp-content/themes/kma-slim/img/placeholder-1.jpg',
-            '/wp-content/themes/kma-slim/img/placeholder-2.jpg',
-            '/wp-content/themes/kma-slim/img/placeholder-3.jpg',
-            '/wp-content/themes/kma-slim/img/placeholder-4.jpg',
-            '/wp-content/themes/kma-slim/img/placeholder-5.jpg'
-        ],
-        currentImage: '/wp-content/themes/kma-slim/img/placeholder-1.jpg',
-        counter: 0,
-        paused: false
     },
 
     methods: {
 
         toggleMenu(){
             this.isOpen = !this.isOpen;
-        },
-
-        clickNext(){
-            this.paused = true;
-            this.nextSlide();
-        },
-
-        clickPrev(){
-            this.paused = true;
-            this.prevSlide();
-        },
-
-        nextSlide(){
-            this.counter++
-            if(this.counter == 4){ this.counter = 0 }
-            this.currentImage = this.sliderSlides[this.counter];
-        },
-
-        prevSlide(){
-            this.counter = this.counter - 1;
-            if(this.counter == -1){ this.counter = 4 }
-            this.currentImage = this.sliderSlides[this.counter];
         }
 
-    },
-
-    beforeUpdate() {
-
-    },
-
-    created() {
-
-        this.currentImage = this.sliderSlides[0];
-
-        setInterval(() => {
-            if(this.paused == false) {
-                this.nextSlide();
-            }
-        }, 6000)
-
-    },
+    }
 
 });
 

@@ -72,6 +72,75 @@
 
 window.Vue = __webpack_require__(2);
 
+Vue.component('slider', {
+
+    template: '\n    <div class="slider">\n        <div class="slider-left icon is-large" >\n            <i class="fa fa-angle-left is-large" aria-hidden="true"></i>\n        </div>\n        \n        <div class="slides">\n            <slot></slot>\n        </div>\n        \n        <div class="slider-right icon is-large" >\n            <i class="fa fa-angle-right is-large" aria-hidden="true"></i>\n        </div>\n    </div>\n    ',
+
+    data: function data() {
+        return {
+            slides: [],
+            activeSlide: 0,
+            paused: false
+        };
+    },
+    created: function created() {
+        var _this = this;
+
+        this.slides = this.$children;
+
+        setInterval(function () {
+            if (_this.paused == false) {
+                _this.nextSlide();
+            }
+        }, 6000);
+    },
+
+
+    methods: {
+        nextSlide: function nextSlide() {
+            this.slides[this.activeSlide]._data.isActive = false;
+            if (this.activeSlide == this.slides.length - 1) {
+                this.activeSlide = -1;
+            }
+            this.activeSlide++;
+            this.slides[this.activeSlide]._data.isActive = true;
+        },
+        prevSlide: function prevSlide() {
+            this.slides[this.activeSlide]._data.isActive = false;
+            if (this.activeSlide == -1) {
+                this.activeSlide = this.slides.length - 1;
+            }
+            this.activeSlide--;
+            this.slides[this.activeSlide]._data.isActive = true;
+        },
+        togglePause: function togglePause() {
+            this.paused = !this.paused;
+        }
+    }
+
+});
+
+Vue.component('slide', {
+
+    props: {
+        image: { required: true }
+    },
+
+    template: '\n    <div class="slide" :style="{ \'background-image\': \'url(\' + image + \')\' }" :class="{ \'is-active\': this.isActive }">\n        <slot></slot>\n    </div>\n    ',
+
+    data: function data() {
+        return {
+            isActive: false
+        };
+    },
+
+
+    computed: {},
+
+    methods: {}
+
+});
+
 Vue.component('message', {
 
     props: ['title'],
@@ -158,53 +227,15 @@ var app = new Vue({
         isOpen: false,
         modalOpen: false,
         siteby: 'Site by KMA.',
-        copyright: 'Kerigan Marketing Associates. All rights reserved.',
-        sliderSlides: ['/wp-content/themes/kma-slim/img/placeholder-1.jpg', '/wp-content/themes/kma-slim/img/placeholder-2.jpg', '/wp-content/themes/kma-slim/img/placeholder-3.jpg', '/wp-content/themes/kma-slim/img/placeholder-4.jpg', '/wp-content/themes/kma-slim/img/placeholder-5.jpg'],
-        currentImage: '/wp-content/themes/kma-slim/img/placeholder-1.jpg',
-        counter: 0,
-        paused: false
+        copyright: 'Kerigan Marketing Associates. All rights reserved.'
     },
 
     methods: {
         toggleMenu: function toggleMenu() {
             this.isOpen = !this.isOpen;
-        },
-        clickNext: function clickNext() {
-            this.paused = true;
-            this.nextSlide();
-        },
-        clickPrev: function clickPrev() {
-            this.paused = true;
-            this.prevSlide();
-        },
-        nextSlide: function nextSlide() {
-            this.counter++;
-            if (this.counter == 4) {
-                this.counter = 0;
-            }
-            this.currentImage = this.sliderSlides[this.counter];
-        },
-        prevSlide: function prevSlide() {
-            this.counter = this.counter - 1;
-            if (this.counter == -1) {
-                this.counter = 4;
-            }
-            this.currentImage = this.sliderSlides[this.counter];
         }
-    },
-
-    beforeUpdate: function beforeUpdate() {},
-    created: function created() {
-        var _this = this;
-
-        this.currentImage = this.sliderSlides[0];
-
-        setInterval(function () {
-            if (_this.paused == false) {
-                _this.nextSlide();
-            }
-        }, 6000);
     }
+
 });
 
 /***/ }),

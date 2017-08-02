@@ -10,25 +10,49 @@ $subhead = ($post->page_information_subhead != '' ? $post->page_information_subh
 ?>
 <div id="mid" >
     <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-        <div class="section-wrapper full-bg" v-bind:style="{ 'background-image': 'url(' + currentImage + ')' }" >
-            <section class="hero is-fullheight is-transparent white-80">
+        <div class="section-wrapper full-bg" >
 
-                <div class="hero-body">
-                    <div class="slider-left icon is-large" @click="clickPrev">
-                        <i class="fa fa-angle-left is-large" aria-hidden="true"></i>
-                    </div>
-                    <div class="container">
-                        <h1 class="title is-1"><?php echo $headline; ?></h1>
-                        <?php echo ($subhead!='' ? '<p class="subtitle is-3">'.$subhead.'</p>' : null); ?>
-                        <?php the_content(); ?>
-                    </div>
-                    <div class="slider-right icon is-large" @click="clickNext">
-                        <i class="fa fa-angle-right is-large" aria-hidden="true"></i>
-                    </div>
-                </div>
-                <a class="clickdown icon center" href="#bot"><i class="fa fa-angle-down" aria-hidden="true"></i></a>
+            <slider>
+                <slide image="/wp-content/themes/kma-slim/img/placeholder-4.jpg" >
+                    <section class="hero is-fullheight is-transparent white-80">
+                        <div class="hero-body">
+                            <div class="container">
+                                <h1 class="title is-1">Slide 1</h1>
+                            </div>
+                        </div>
+                    </section>
+                </slide>
+                <slide image="/wp-content/themes/kma-slim/img/placeholder-2.jpg">
+                    <section class="hero is-fullheight is-transparent white-80">
+                        <div class="hero-body">
+                            <div class="container">
+                                <h1 class="title is-1">Slide 2</h1>
+                            </div>
+                        </div>
+                    </section>
+                </slide>
+                <slide image="/wp-content/themes/kma-slim/img/placeholder-3.jpg">
+                    <section class="hero is-fullheight is-transparent white-80">
+                        <div class="hero-body">
+                            <div class="container">
+                                <h1 class="title is-1">Slide 3</h1>
+                            </div>
+                        </div>
+                    </section>
+                </slide>
+                <slide image="/wp-content/themes/kma-slim/img/placeholder-1.jpg">
+                    <section class="hero is-fullheight is-transparent white-80">
+                        <div class="hero-body">
+                            <div class="container">
+                                <h1 class="title is-1">Slide 4</h1>
+                            </div>
+                        </div>
+                    </section>
+                </slide>
+            </slider>
 
-            </section>
+            <a class="clickdown icon center" href="#bot"><i class="fa fa-angle-down" aria-hidden="true"></i></a>
+
         </div>
     </article><!-- #post-## -->
 </div>
