@@ -13,7 +13,7 @@ $subhead = ($post->page_information_subhead != '' ? $post->page_information_subh
         <div class="section-wrapper full-bg" >
 
             <slider>
-                <slide image="/wp-content/themes/kma-slim/img/placeholder-4.jpg" >
+                <slide image="/wp-content/themes/kma-slim/img/placeholder-4.jpg" :active="true" >
                     <section class="hero is-fullheight is-transparent white-80">
                         <div class="hero-body">
                             <div class="container">

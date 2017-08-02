@@ -74,7 +74,7 @@ window.Vue = __webpack_require__(2);
 
 Vue.component('slider', {
 
-    template: '\n    <div class="slider">\n        <div class="slider-left icon is-large" >\n            <i class="fa fa-angle-left is-large" aria-hidden="true"></i>\n        </div>\n        \n        <div class="slides">\n            <slot></slot>\n        </div>\n        \n        <div class="slider-right icon is-large" >\n            <i class="fa fa-angle-right is-large" aria-hidden="true"></i>\n        </div>\n    </div>\n    ',
+    template: '\n    <div class="slider">\n        <div class="slider-left icon is-large" @click="clickPrev" >\n            <i class="fa fa-angle-left is-large" aria-hidden="true"></i>\n        </div>\n        \n        <div class="slides">\n            <slot></slot>\n        </div>\n        \n        <div class="slider-right icon is-large" @click="clickNext" >\n            <i class="fa fa-angle-right is-large" aria-hidden="true"></i>\n        </div>\n    </div>\n    ',
 
     data: function data() {
         return {
@@ -87,7 +87,6 @@ Vue.component('slider', {
         var _this = this;
 
         this.slides = this.$children;
-
         setInterval(function () {
             if (_this.paused == false) {
                 _this.nextSlide();
@@ -107,11 +106,19 @@ Vue.component('slider', {
         },
         prevSlide: function prevSlide() {
             this.slides[this.activeSlide]._data.isActive = false;
+            this.activeSlide--;
             if (this.activeSlide == -1) {
                 this.activeSlide = this.slides.length - 1;
             }
-            this.activeSlide--;
             this.slides[this.activeSlide]._data.isActive = true;
+        },
+        clickNext: function clickNext() {
+            this.nextSlide();
+            this.togglePause();
+        },
+        clickPrev: function clickPrev() {
+            this.prevSlide();
+            this.togglePause();
         },
         togglePause: function togglePause() {
             this.paused = !this.paused;
@@ -123,22 +130,22 @@ Vue.component('slider', {
 Vue.component('slide', {
 
     props: {
-        image: { required: true }
+        image: { required: true },
+        active: { default: false }
     },
 
-    template: '\n    <div class="slide" :style="{ \'background-image\': \'url(\' + image + \')\' }" :class="{ \'is-active\': this.isActive }">\n        <slot></slot>\n    </div>\n    ',
+    template: '\n    <div class="slide full-bg" :style="{ \'background-image\': \'url(\' + image + \')\' }" :class="{ \'is-active\': this.isActive }">\n        <slot></slot>\n    </div>\n    ',
 
     data: function data() {
         return {
             isActive: false
         };
     },
-
-
-    computed: {},
-
-    methods: {}
-
+    created: function created() {
+        if (this.active == true) {
+            this.isActive = true;
+        }
+    }
 });
 
 Vue.component('message', {

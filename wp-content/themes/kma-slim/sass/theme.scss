@@ -8,6 +8,7 @@ html {
 body {
   height: auto !important;
   min-height: 100%;
+  overflow-x: initial;
 }
 
 body * {
@@ -53,7 +54,6 @@ body * {
 .full-bg {
   background-size: cover;
   background-attachment: fixed;
-  transition: background-image 2s linear;
 }
 
 .black-50 {
@@ -78,7 +78,6 @@ body * {
 
 a.clickdown.icon.center {
   position: relative;
-  margin: 1rem auto;
   display: inline-block;
   height: 40px;
   width: 40px;
@@ -86,8 +85,10 @@ a.clickdown.icon.center {
   border-radius: 50%;
   text-align: center;
   vertical-align: middle;
-  margin-top: -50px;
+  top: -50px;
   z-index: 30;
+  left: 50%;
+  margin-left: -20px;
 }
 
 .clickdown i.fa.fa-angle-down {
