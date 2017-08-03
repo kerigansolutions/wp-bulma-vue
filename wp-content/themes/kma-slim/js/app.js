@@ -96,48 +96,24 @@ Vue.component('slide', {
 
 });
 
-Vue.component('message', {
+import message from './components/message.vue';
+import modal from './components/modal.vue';
 
-    props: ['title'],
-
-    data(){
-        return {
-            isVisible: true
-        };
-    },
-
-    template: `
-    <article class="message" v-show="isVisible">
-        <div class="message-header"> {{ title }} <button class="delete" @click="hideMessage"></button></div>
-        <div class="message-body">
-            <slot></slot>
-        </div>
-    </article>
-    `,
-
-    methods: {
-        hideMessage(){
-            this.isVisible = !this.isVisible;
-        }
-    }
-
-});
-
-Vue.component('modal', {
-
-    template: `
-    <div class="modal is-active">
-      <div class="modal-background"></div>
-      <div class="modal-content">
-          <div class="box">
-            <slot></slot>
-          </div>
-      </div>
-      <button class="modal-close is-large" @click="$emit('close')"></button>
-    </div>
-    `,
-
-});
+// Vue.component('modal', {
+//
+//     template: `
+//     <div class="modal is-active">
+//       <div class="modal-background"></div>
+//       <div class="modal-content">
+//           <div class="box">
+//             <slot></slot>
+//           </div>
+//       </div>
+//       <button class="modal-close is-large" @click="$emit('close')"></button>
+//     </div>
+//     `,
+//
+// });
 
 Vue.component('tabs', {
 
@@ -210,6 +186,11 @@ Vue.component('tab', {
 var app = new Vue({
 
     el: '#app',
+
+    components: {
+        message,
+        modal
+    },
 
     data: {
         isOpen: false,
