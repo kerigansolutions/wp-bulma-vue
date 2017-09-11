@@ -1,5 +1,5 @@
 <template>
-    <div class="slide full-bg" :style="{ 'background-image': 'url(' + image + ')' }" :class="{ 'is-active': this.isActive }">
+    <div :id=" 'slide-' + id " :class="['slide',{ 'active' :isActive }]" :style="{ 'background-image': 'url(' + image + ')', 'z-index': zindex }">
         <slot></slot>
     </div>
 </template>
@@ -8,8 +8,9 @@
     export default {
 
         props: {
+            active: { default: false },
             image: { required: true },
-            active: { default: false }
+            id: { type: Number }
         },
 
         data(){
@@ -20,6 +21,13 @@
 
         created(){
             if(this.active == true){ this.isActive = true }
+        },
+
+        computed: {
+            zindex: function(){
+                var index = this.id;
+                return (20 - index);
+            }
         }
 
     }

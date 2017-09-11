@@ -19,7 +19,7 @@ class Testimonials {
 	 * @return null
 	 */
 	public function createPostType() {
-		$quote = new Custom_Post_Type( 'Testimonial', array(
+		$quote = new CustomPostType( 'Testimonial', array(
 				'supports'           => array( 'title', 'editor', 'revisions' ),
 				'menu_icon'          => 'dashicons-format-quote',
 				'rewrite'            => array( 'slug' => 'testimonials' ),
@@ -29,9 +29,9 @@ class Testimonials {
 				'publicly_queryable' => true,
 			) );
 
-		$quote->add_taxonomy( 'Testimonial Category' );
+		$quote->addTaxonomy( 'Testimonial Category' );
 
-		$quote->add_meta_box( 'Author Info', array(
+		$quote->addMetaBox( 'Author Info', array(
 				'Name'          => 'text',
 				'Company'       => 'text',
 				'Short Version' => 'longtext',

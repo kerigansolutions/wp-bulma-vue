@@ -15,13 +15,12 @@ $subhead = ($post->page_information_subhead != '' ? $post->page_information_subh
             <slider>
                     <?php
                         $slider = new Slider();
-                        echo $slider->getSlider('home-page-slider');
+                        echo $slider->getSlider('home-page-slideshow');
                     ?>
             </slider>
 
             <a class="clickdown icon center" href="#bot"><i class="fa fa-angle-down" aria-hidden="true"></i></a>
 
         </div>
-    </article><!-- #post-## -->
+    </article>
 </div>
-<!--<modal v-if="isVisible" @close="isVisible = false"><div class="box" >Welcome!</div></modal>-->

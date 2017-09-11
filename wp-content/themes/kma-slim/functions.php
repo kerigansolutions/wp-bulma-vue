@@ -9,8 +9,31 @@
 require ( 'vendor/autoload.php' );
 require ( 'inc/bulma_navwalker.php' );
 require ( 'inc/bulma_pagination.php' );
-require ( 'inc/cpt.php' );
-require ( 'inc/loadmodules.php' );
+require ( 'inc/CustomPostType/CustomPostType.php' );
+
+include('inc/modules/social/sociallinks.php');
+include('inc/modules/testimonials/testimonials.php');
+include('inc/modules/layouts/Layouts.php');
+include('inc/modules/slider/Slider.php');
+
+$socialLinks = new SocialSettingsPage();
+if(is_admin()) {
+    $socialLinks->createPage();
+}
+
+$testimonials = new Testimonials();
+$testimonials->createPostType();
+$testimonials->createAdminColumns();
+$testimonials->createShortcode();
+
+$layouts = new Layouts();
+$layouts->createPostType();
+$layouts->createDefaultFormats();
+$layouts->createLayout('two-column','two column page layout','twocol');
+
+$slider = new Slider();
+$slider->createPostType();
+$slider->createAdminColumns();
 
 if ( ! function_exists( 'kmaslim_setup' ) ) :
 

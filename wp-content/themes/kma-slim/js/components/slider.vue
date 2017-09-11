@@ -54,17 +54,12 @@
 
             clickNext(){
                 this.nextSlide()
-                this.togglePause()
+                this.paused = !this.paused;
             },
 
             clickPrev(){
                 this.prevSlide()
-                this.togglePause()
-            },
-
-            togglePause(){
                 this.paused = !this.paused;
-                console.log('paused: ' + this.paused);
             }
 
         }

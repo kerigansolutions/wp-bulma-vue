@@ -233,8 +233,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
 
     props: {
+        active: { default: false },
         image: { required: true },
-        active: { default: false }
+        id: { type: Number }
     },
 
     data: function data() {
@@ -246,7 +247,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         if (this.active == true) {
             this.isActive = true;
         }
+    },
+
+
+    computed: {
+        zindex: function zindex() {
+            var index = this.id;
+            return 20 - index;
+        }
     }
+
 });
 
 /***/ }),
@@ -311,15 +321,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         clickNext: function clickNext() {
             this.nextSlide();
-            this.togglePause();
+            this.paused = !this.paused;
         },
         clickPrev: function clickPrev() {
             this.prevSlide();
-            this.togglePause();
-        },
-        togglePause: function togglePause() {
             this.paused = !this.paused;
-            console.log('paused: ' + this.paused);
         }
     }
 
@@ -614,13 +620,16 @@ module.exports = Component.exports
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "slide full-bg",
-    class: {
-      'is-active': this.isActive
-    },
+    class: ['slide', {
+      'active': _vm.isActive
+    }],
     style: ({
-      'background-image': 'url(' + _vm.image + ')'
-    })
+      'background-image': 'url(' + _vm.image + ')',
+      'z-index': _vm.zindex
+    }),
+    attrs: {
+      "id": 'slide-' + _vm.id
+    }
   }, [_vm._t("default")], 2)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
@@ -660,11 +669,7 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "slider",
-    on: {
-      "mouseover": _vm.togglePause,
-      "mouseleave": _vm.togglePause
-    }
+    staticClass: "slider"
   }, [_c('div', {
     staticClass: "slider-left icon is-large",
     on: {
@@ -676,7 +681,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "aria-hidden": "true"
     }
   })]), _vm._v(" "), _c('div', {
-    staticClass: "slides"
+    staticClass: "slides",
+    on: {
+      "mouseover": _vm.togglePause,
+      "mouseleave": _vm.togglePause
+    }
   }, [_vm._t("default")], 2), _vm._v(" "), _c('div', {
     staticClass: "slider-right icon is-large",
     on: {
