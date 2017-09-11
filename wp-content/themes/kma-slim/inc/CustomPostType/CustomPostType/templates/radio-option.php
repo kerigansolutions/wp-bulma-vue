@@ -1,0 +1,1 @@
+<label style="padding-right:2rem;"><input type="radio" name="custom_meta[{field-name}]" value="{field-value}" {field-selected} > {field-value}</label>
