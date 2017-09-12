@@ -3,7 +3,7 @@
  * CustomPostType Class
  */
 
-//TODO: namespace KMA\Helpers;
+//TODO: namespace PSJCG\Helpers;
 
 class CustomPostType
 {
@@ -212,8 +212,16 @@ class CustomPostType
 
     private function createField($label, $type, $meta, $data)
     {
+
+        $isMulti = ( is_array($type) ? true : false);
         $fieldIdName  = $this->uglify($data['id']) . '_' . $this->uglify($label);
-        $templateFile = $this->dir . '/templates/' . $type . '.php';
+
+        if($isMulti){
+            $templateFile = $this->dir . '/templates/' . $type['type'] . '.php';
+        }else{
+            $templateFile = $this->dir . '/templates/' . $type . '.php';
+        }
+
         if (file_exists($templateFile)) {
             $field = file_get_contents($templateFile);
 
@@ -241,6 +249,24 @@ class CustomPostType
             if ($type == 'date') {
                 wp_enqueue_style('flatpickr-style', 'https://unpkg.com/flatpickr/dist/flatpickr.min.css');
                 wp_enqueue_script('flatpickr-script', 'https://unpkg.com/flatpickr', array('jquery'));
+            }
+
+            if ($isMulti) {
+
+                $options = '';
+                foreach($type['data'] as $key => $option) {
+                    $optionField = file_get_contents($this->dir . '/templates/' . $type['type'] . '-option.php');
+                    $optionField = str_replace('{field-name}', $fieldIdName, $optionField);
+                    $optionField = str_replace('{field-value}', $option, $optionField);
+
+                    if($option == $meta[$fieldIdName][0]){
+                        $optionField = str_replace('{field-selected}', ( $type['type'] == 'select' ? 'selected' : 'checked' ), $optionField);
+                    }
+
+                    $options .= $optionField;
+                }
+                $field = str_replace('{multifields}', $options, $field);
+
             }
 
             echo $field;
