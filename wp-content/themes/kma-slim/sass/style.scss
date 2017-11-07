@@ -18,10 +18,13 @@ License URI:        http://opensource.org/licenses/MIT
 @import "variables.sass";
 
 //Bulma
-@import "../node_modules/bulma/bulma";
+@import "../node_modules/bulma/bulma";  ;
 
 // WP Core
 @import "core.scss";
+
+//Helpers
+@import "helpers.scss";
 
 // Theme
 @import "theme.scss";

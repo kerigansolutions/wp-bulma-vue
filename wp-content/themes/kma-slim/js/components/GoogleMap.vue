@@ -1,10 +1,13 @@
 <template>
-    <div class="google-map" :id="mapName"></div>
+    <div class="google-map" :id="mapName">
+        <slot></slot>
+    </div>
 </template>
 
 <script>
     export default {
         props: [
+            'name',
             'latitude',
             'longitude',
             'zoom'
@@ -13,10 +16,8 @@
         data: function () {
             return {
                 mapName: this.name + "-map",
-                markerCoordinates: [{
-                    latitude: this.latitude,
-                    longitude: this.longitude
-                }]
+                markers: [],
+                pins: []
             }
         },
 
@@ -30,56 +31,20 @@
                 scaleControl: true,
                 styles: [
                     {
-                        "featureType": "all",
-                        "elementType": "geometry.fill",
-                        "stylers": [
-                            {
-                                "weight": "2.00"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "all",
-                        "elementType": "geometry.stroke",
-                        "stylers": [
-                            {
-                                "color": "#9c9c9c"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "all",
-                        "elementType": "labels.text",
-                        "stylers": [
-                            {
-                                "visibility": "on"
-                            }
-                        ]
-                    },
-                    {
                         "featureType": "landscape",
                         "elementType": "all",
                         "stylers": [
                             {
-                                "color": "#f2f2f2"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "landscape",
-                        "elementType": "geometry.fill",
-                        "stylers": [
+                                "hue": "#FFBB00"
+                            },
                             {
-                                "color": "#e9eef2"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "landscape.man_made",
-                        "elementType": "geometry.fill",
-                        "stylers": [
+                                "saturation": 43.400000000000006
+                            },
                             {
-                                "color": "#dddddd"
+                                "lightness": 37.599999999999994
+                            },
+                            {
+                                "gamma": 1
                             }
                         ]
                     },
@@ -88,46 +53,16 @@
                         "elementType": "all",
                         "stylers": [
                             {
-                                "visibility": "off"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "road",
-                        "elementType": "all",
-                        "stylers": [
-                            {
-                                "saturation": -100
+                                "hue": "#a0ff00"
                             },
                             {
-                                "lightness": 45
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "road",
-                        "elementType": "geometry.fill",
-                        "stylers": [
+                                "saturation": "-21"
+                            },
                             {
-                                "color": "#999999"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "road",
-                        "elementType": "labels.text.fill",
-                        "stylers": [
+                                "lightness": "35"
+                            },
                             {
-                                "color": "#7b7b7b"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "road",
-                        "elementType": "labels.text.stroke",
-                        "stylers": [
-                            {
-                                "color": "#ffffff"
+                                "gamma": 1
                             }
                         ]
                     },
@@ -136,78 +71,108 @@
                         "elementType": "all",
                         "stylers": [
                             {
-                                "visibility": "simplified"
+                                "hue": "#ffc200"
+                            },
+                            {
+                                "saturation": -61.8
+                            },
+                            {
+                                "lightness": "7"
+                            },
+                            {
+                                "gamma": 1
                             }
                         ]
                     },
                     {
                         "featureType": "road.arterial",
-                        "elementType": "labels.icon",
-                        "stylers": [
-                            {
-                                "visibility": "off"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "transit",
                         "elementType": "all",
                         "stylers": [
                             {
-                                "visibility": "off"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "water",
-                        "elementType": "all",
-                        "stylers": [
-                            {
-                                "color": "#46bcec"
+                                "hue": "#ff0300"
                             },
                             {
-                                "visibility": "on"
+                                "saturation": "-100"
+                            },
+                            {
+                                "lightness": "20"
+                            },
+                            {
+                                "gamma": 1
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "road.local",
+                        "elementType": "all",
+                        "stylers": [
+                            {
+                                "hue": "#ff0300"
+                            },
+                            {
+                                "saturation": -100
+                            },
+                            {
+                                "lightness": "-14"
+                            },
+                            {
+                                "gamma": 1
                             }
                         ]
                     },
                     {
                         "featureType": "water",
-                        "elementType": "geometry.fill",
+                        "elementType": "all",
                         "stylers": [
                             {
-                                "color": "#04313b"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "water",
-                        "elementType": "labels.text.fill",
-                        "stylers": [
+                                "hue": "#0078ff"
+                            },
                             {
-                                "color": "#ffffff"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "water",
-                        "elementType": "labels.text.stroke",
-                        "stylers": [
+                                "saturation": "-65"
+                            },
                             {
-                                "color": "#ffffff"
+                                "lightness": "-7"
+                            },
+                            {
+                                "gamma": 1
                             }
                         ]
                     }
                 ]
             }
             const map = new google.maps.Map(element, options);
-            this.markerCoordinates.forEach((coord) => {
-                const position = new google.maps.LatLng(coord.latitude, coord.longitude);
+            const bounds = new google.maps.LatLngBounds();
+            this.markers = this.$children;
+
+            for(var i = 0; i < this.markers.length; i++){
+                var pin = this.markers[i];
+                this.pins.push({
+                    latitude: pin._data.markerCoordinates.latitude,
+                    longitude: pin._data.markerCoordinates.longitude,
+                });
+
+                const position = new google.maps.LatLng(pin.latitude, pin.longitude);
                 const marker = new google.maps.Marker({
                     position,
-                    map
+                    map,
+                    icon: '/wp-content/themes/kma-slim/img/map-pin.png'
                 });
-            });
-        }
+
+                const infowindow = new google.maps.InfoWindow({
+                    maxWidth: 279,
+                    content: pin.$refs.infowindow,
+                    title: pin._data.name
+                });
+
+                marker.addListener('click', function(){
+                    infowindow.open(map, marker);
+                });
+
+                bounds.extend(position);
+                map.fitBounds(bounds);
+
+            }
+        },
 
     }
 </script>

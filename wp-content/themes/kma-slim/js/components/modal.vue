@@ -1,23 +1,18 @@
 <template>
-    <div class="modal is-active" :active="activeModal">
-        <div class="modal-background"></div>
-        <div class="modal-content">
-            <div class="box">
-                <slot></slot>
-            </div>
+    <div class="modal is-active" v-if="this.$parent.modalOpen != ''">
+        <div class="modal-background" @click="toggleModal"></div>
+        <div class="modal-content large">
+            <slot></slot>
         </div>
-        <button class="modal-close is-large" @click="$emit('close')"></button>
+        <button class="modal-close is-large" @click="toggleModal"></button>
     </div>
 </template>
 
 <script>
     export default {
-        props: {
-            active: { default: false }
-        },
         data() {
             return {
-                showModal: this.active
+                showModal: false
             }
         },
         methods: {
@@ -29,10 +24,10 @@
             }
         },
         mounted() {
-            console.log('Component mounted.');
+            //console.log('Component mounted.');
 
-            this.$parent.$on('toggleModal', function (modal) {
-                this.activeModal = modal;
+            this.$parent.$on('toggleModal', function (modal,keyframe) {
+                this.modalOpen = modal;
             });
 
         }

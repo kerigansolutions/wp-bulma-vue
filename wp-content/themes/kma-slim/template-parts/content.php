@@ -7,6 +7,8 @@
  */
 $headline = ($post->page_information_headline != '' ? $post->page_information_headline : $post->post_title);
 $subhead = ($post->page_information_subhead != '' ? $post->page_information_subhead : '');
+
+include(locate_template('template-parts/sections/top.php'));
 ?>
 <div id="mid" >
     <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
@@ -43,3 +45,4 @@ $subhead = ($post->page_information_subhead != '' ? $post->page_information_subh
         </section>
     </article><!-- #post-## -->
 </div>
+<?php include(locate_template('template-parts/sections/bot.php')); ?>

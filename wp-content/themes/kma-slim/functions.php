@@ -3,18 +3,19 @@
  * @package KMA
  * @subpackage kmaslim
  * @since 1.0
- * @version 1.2
+ * @version 1.3
  */
 
-require ( 'vendor/autoload.php' );
-require ( 'inc/bulma_navwalker.php' );
-require ( 'inc/bulma_pagination.php' );
-require ( 'inc/CustomPostType/CustomPostType.php' );
+use Includes\Modules\Leads\Leads;
+use Includes\Modules\Helpers\CleanWP;
+use Includes\Modules\Layouts\Layouts;
+use Includes\Modules\Slider\BulmaSlider;
+use Includes\Modules\Testimonials\Testimonials;
+use Includes\Modules\Social\SocialSettingsPage;
 
-include('inc/modules/social/sociallinks.php');
-include('inc/modules/testimonials/testimonials.php');
-include('inc/modules/layouts/Layouts.php');
-include('inc/modules/slider/Slider.php');
+require('vendor/autoload.php');
+
+new CleanWP();
 
 $socialLinks = new SocialSettingsPage();
 if(is_admin()) {
@@ -24,14 +25,14 @@ if(is_admin()) {
 $testimonials = new Testimonials();
 $testimonials->createPostType();
 $testimonials->createAdminColumns();
-$testimonials->createShortcode();
+//$testimonials->createShortcode();
 
 $layouts = new Layouts();
 $layouts->createPostType();
 $layouts->createDefaultFormats();
 $layouts->createLayout('two-column','two column page layout','twocol');
 
-$slider = new Slider();
+$slider = new BulmaSlider();
 $slider->createPostType();
 $slider->createAdminColumns();
 
@@ -46,7 +47,7 @@ function kmaslim_setup() {
 
 	register_nav_menus( array(
 		'mobile-menu'    => esc_html__( 'Mobile Menu', 'kmaslim' ),
-		'mini-top-right' => esc_html__( 'Mini Menu Top Right', 'kmaslim' ),
+		'footer-menu'    => esc_html__( 'Footer Menu', 'kmaslim' ),
 		'main-menu'      => esc_html__( 'Main Navigation', 'kmaslim' )
 	) );
 
@@ -63,8 +64,7 @@ function kmaslim_setup() {
 			<?php echo file_get_contents(get_template_directory() . '/style.css'); ?>
 		</style>
 	<?php }
-	//add_action( 'wp_head', 'kmaslim_inline' );
-
+	add_action( 'wp_head', 'kmaslim_inline' );
 	wp_register_script( 'scripts', get_template_directory_uri() . '/app.js', array(), '0.0.1', true );
 
 }
@@ -73,7 +73,6 @@ add_action( 'after_setup_theme', 'kmaslim_setup' );
 
 function kmaslim_scripts() {
 	wp_enqueue_script( 'scripts' );
-	wp_enqueue_style( 'style', get_stylesheet_uri() );
 }
 add_action( 'wp_enqueue_scripts', 'kmaslim_scripts' );
 

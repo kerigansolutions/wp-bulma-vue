@@ -1,5 +1,13 @@
 {
   "require-dev": {
     "panique/laravel-sass": "1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Includes\\Modules\\": "inc/modules"
+    }
+  },
+  "require": {
+    "guzzlehttp/guzzle": "^6.3"
   }
 }

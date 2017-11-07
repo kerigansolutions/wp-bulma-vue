@@ -4,7 +4,7 @@
             <i class="fa fa-angle-left is-large" aria-hidden="true"></i>
         </div>
 
-        <div class="slides" @mouseover="togglePause" @mouseleave="togglePause">
+        <div class="slides" @mouseover="pauseSlide" @mouseleave="unpauseSlide">
             <slot></slot>
         </div>
 
@@ -54,12 +54,20 @@
 
             clickNext(){
                 this.nextSlide()
-                this.paused = !this.paused;
+                this.pauseSlide()
             },
 
             clickPrev(){
                 this.prevSlide()
-                this.paused = !this.paused;
+                this.pauseSlide()
+            },
+
+            pauseSlide(){
+                this.paused = true;
+            },
+
+            unpauseSlide(){
+                this.paused = false;
             }
 
         }
