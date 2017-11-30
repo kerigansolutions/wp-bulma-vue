@@ -1,6 +1,6 @@
 <?php
 
-namespace Includes\Modules\CPT;
+namespace KeriganSolutions\CPT;
 
 /**
  * CustomPostType Class

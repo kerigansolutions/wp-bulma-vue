@@ -1,0 +1,19 @@
+{
+    "name": "kerigansolutions/cpt",
+    "description": "Adds additional custom post type functionality for our WordPress sites",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bryan Baird",
+            "email": "bryan@kerigan.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "KeriganSolutions\\CPT\\" : "src/"
+        }
+    }
+}

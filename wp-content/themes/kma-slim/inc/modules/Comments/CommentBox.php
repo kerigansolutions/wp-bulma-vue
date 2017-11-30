@@ -1,7 +1,7 @@
 <?php
 namespace Includes\Modules\Comments;
 
-use Includes\Modules\CPT\CustomPostType;
+use KeriganSolutions\CPT\CustomPostType;
 
 class CommentBox
 {

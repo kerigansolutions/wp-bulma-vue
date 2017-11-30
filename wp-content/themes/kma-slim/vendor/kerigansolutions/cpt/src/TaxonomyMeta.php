@@ -6,7 +6,7 @@
  * Time: 9:24 PM
  */
 
-namespace Includes\Modules\CPT;
+namespace KeriganSolutions\CPT;
 
 
 class TaxonomyMeta {

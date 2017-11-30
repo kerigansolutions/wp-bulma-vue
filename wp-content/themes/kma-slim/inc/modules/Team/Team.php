@@ -8,7 +8,7 @@
 
 namespace Includes\Modules\Team;
 
-use Includes\Modules\CPT\CustomPostType;
+use KeriganSolutions\CPT\CustomPostType;
 
 class Team
 {

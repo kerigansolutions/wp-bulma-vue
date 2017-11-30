@@ -2,7 +2,7 @@
 
 namespace Includes\Modules\Slider;
 
-use Includes\Modules\CPT\CustomPostType;
+use KeriganSolutions\CPT\CustomPostType;
 
 /**
  * Slider Class

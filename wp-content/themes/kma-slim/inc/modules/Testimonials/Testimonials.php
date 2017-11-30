@@ -2,7 +2,7 @@
 
 namespace Includes\Modules\Testimonials;
 
-use Includes\Modules\CPT\CustomPostType;
+use KeriganSolutions\CPT\CustomPostType;
 
 /**
  * Testimonials

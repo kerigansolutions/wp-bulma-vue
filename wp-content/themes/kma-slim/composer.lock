@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "19c19ef56758c2eb5ca9cc7e856eb493",
+    "content-hash": "f27909d2f140accaa05776d1b537c236",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -186,6 +186,39 @@
                 "url"
             ],
             "time": "2017-03-20T17:10:46+00:00"
+        },
+        {
+            "name": "kerigansolutions/cpt",
+            "version": "0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kerigansolutions/cpt.git",
+                "reference": "fd0836217f0708a8805d2c3b74b891ea0dcaf3bf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kerigansolutions/cpt/zipball/fd0836217f0708a8805d2c3b74b891ea0dcaf3bf",
+                "reference": "fd0836217f0708a8805d2c3b74b891ea0dcaf3bf",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "KeriganSolutions\\CPT\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bryan Baird",
+                    "email": "bryan@kerigan.com"
+                }
+            ],
+            "description": "Adds additional custom post type functionality for our WordPress sites",
+            "time": "2017-11-30T22:00:55+00:00"
         },
         {
             "name": "psr/http-message",

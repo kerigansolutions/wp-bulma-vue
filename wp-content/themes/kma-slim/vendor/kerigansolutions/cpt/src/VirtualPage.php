@@ -6,8 +6,7 @@
  * Time: 3:58 PM
  */
 
-namespace Includes\Modules\CPT;
-
+namespace KeriganSolutions\CPT;
 
 class VirtualPage {
 

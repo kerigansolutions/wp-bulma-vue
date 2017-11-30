@@ -2,7 +2,7 @@
 
 namespace Includes\Modules\Leads;
 
-use Includes\Modules\CPT\CustomPostType;
+use KeriganSolutions\CPT\CustomPostType;
 
 class Leads
 {
