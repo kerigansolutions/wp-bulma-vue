@@ -34,6 +34,7 @@ class BulmaSlider
 
         $slider->addMetaBox('Slide Details', [
             'Photo File'         => 'image',
+            'Gallery Test'       => 'gallery',
             'Headline'           => 'text',
             'Caption'            => 'text',
             'Alt Tag'            => 'text',

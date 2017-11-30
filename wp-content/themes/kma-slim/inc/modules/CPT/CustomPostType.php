@@ -233,6 +233,15 @@ class CustomPostType
                 wp_enqueue_script('flatpickr-script', 'https://unpkg.com/flatpickr', [ 'jquery' ]);
             }
 
+            if($type == 'gallery') {
+                $images = '';
+                $imageIds = explode('|',$fieldValue);
+                foreach($imageIds as $imageId){
+                    $images .= wp_get_attachment_image( $imageId, 'thumbnail', false, [ 'style' => "width: 150px; max-width: 100%; float: left; margin:.5%" ]);
+                }
+                $field = str_replace('{images}', ($fieldValue!='' ? $images : ''), $field);
+            }
+
             if ($isMulti) {
                 $options = '';
                 foreach ($type['data'] as $key => $option) {
