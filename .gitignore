@@ -1,3 +1,5 @@
 .idea/
 wp-content/themes/kma-slim/node_modules/
 wp-config.php
+
+/vendor/

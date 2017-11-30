@@ -1,0 +1,14 @@
+{
+    "name": "kerigansolutions/wp-bulma-vue",
+    "description": "A starter template for Bulma + Vue WordPress installs",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Daron Adkins",
+            "email": "daron.adkins@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
